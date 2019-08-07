@@ -8,8 +8,8 @@ const CLOUD = ['Ясно','Облачно'];
 
 // timeStamp начала сегодняшнего дня
 const getToday = () => {
-	let now = new Date();
-	let dateTmp = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+	const now = new Date();
+	const dateTmp = new Date(now.getFullYear(), now.getMonth(), now.getDate());
 	return dateTmp.getTime();
 };
 // день недели 
@@ -17,12 +17,12 @@ const getDayOfWeek = elem => {
 	if(getToday() == elem.date) {
 		return TODAY;
 	}
-	let date = new Date(elem.date);
+	const date = new Date(elem.date);
 	return DAY[date.getDay()];
 };
 // число и месяц
 const getDate = elem => {
-	let date = new Date(elem.date);
+	const date = new Date(elem.date);
 	return `${date.getDate()} ${MONTH[date.getMonth()]}`;
 };
 // класс для картинки погоды
@@ -72,19 +72,19 @@ const getCloudinessText1 = elem => {
 };
 
 const createDOMElement = (tag, text, ...className) => {
-	let element = document.createElement(tag);
+	const element = document.createElement(tag);
 	className.forEach(elem => element.classList.add(elem));
 	element.append(document.createTextNode(text));
 	return element;
 };
 // шаблон даты в header
 const createToday = () => {
-	let date = new Date(getToday());
+	const date = new Date(getToday());
 	return createDOMElement('span', `Самара, ${date.getDate()} ${MONTH[date.getMonth()]}, ${DAY[new Date(getToday()).getDay()]}`, 'header__h1-today');
 };
 // шаблон карточки погоды
 const createItem = elem => {
-	let mainDiv = createDOMElement('div', '', 'weather-list__item', 'weather-list-item');
+	const mainDiv = createDOMElement('div', '', 'weather-list__item', 'weather-list-item');
 	mainDiv.append(createDOMElement('div', getDayOfWeek(elem), 'weather-list-item__day-name'));
 	mainDiv.append(createDOMElement('div', getDate(elem), 'weather-list-item__date'));
 	mainDiv.append(createDOMElement('div', '', 'weather-list-item__img', getCloudinessImgClass(elem)));
@@ -96,8 +96,8 @@ const createItem = elem => {
 };
 // шаблон прелоудера
 const createPreload = () => {
-	let mainDiv = createDOMElement('div', '', 'weather-list__item', 'weather-list-item');
-	let spinner = createDOMElement('div', '', 'spinner');
+	const mainDiv = createDOMElement('div', '', 'weather-list__item', 'weather-list-item');
+	const spinner = createDOMElement('div', '', 'spinner');
 	Array(5).fill().forEach((elem, index) => {
 		spinner.append(createDOMElement('div', '', `rect${index + 1}`));
 	});
@@ -106,17 +106,17 @@ const createPreload = () => {
 };
 // смещение timeStamp на days дней
 const getDateTimeStamp = (timeStamp, days) => {
-	let tmp = new Date(timeStamp);
+	const tmp = new Date(timeStamp);
 	tmp.setDate(tmp.getDate() + days);
 	return tmp.getTime();
 };
 // генератор JSON 
 const help = () => {
-	let now = new Date();
-	now.setDate(now.getDate() - 14);
-	let dateTmp = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-	return JSON.stringify(new Array(100).fill().map(() => {
-		let elem = {
+	const now = new Date();
+	now.setDate(now.getDate() - 3);
+	const dateTmp = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+	return JSON.stringify(new Array(20).fill().map(() => {
+		const elem = {
 			"temperature": {}
 		};
 		elem.date = dateTmp.getTime();
@@ -131,8 +131,8 @@ const help = () => {
 	}))
 };
 
-let mydata = JSON.parse(weather);
-let data = mydata.filter(elem => elem.date >= getToday());
+const mydata = JSON.parse(weather);
+const data = mydata.filter(elem => elem.date >= getToday());
 
 document.addEventListener('DOMContentLoaded', event => {
 	let prevActive = false;
@@ -140,9 +140,8 @@ document.addEventListener('DOMContentLoaded', event => {
 	let tmpShowDate = getToday();
 
 	const showWeather = (timeStamp, data) => {	
-		let container = document.querySelector('.js-weather__list');
+		const container = document.querySelector('.js-weather__list');
 		container.innerHTML = '';
-		let dateTmp = new Date(timeStamp);
 		let tmpItem;
 
 		Array(4).fill().forEach(() => {
@@ -161,11 +160,11 @@ document.addEventListener('DOMContentLoaded', event => {
 				return tmpItem;
 			})) {
 			nextActive = true;
-			document.querySelector('.js-next').classList.add('active');
+			document.querySelector('.weather__nav--next').classList.add('active');
 		}
 		else {
 			nextActive = false;
-			document.querySelector('.js-next').classList.remove('active');
+			document.querySelector('.weather__nav--next').classList.remove('active');
 		}
 
 		if(Array(4).fill(1).find((el, index) => {
@@ -176,30 +175,29 @@ document.addEventListener('DOMContentLoaded', event => {
 				return tmpItem;
 			})) {
 			prevActive = true;
-			document.querySelector('.js-prev').classList.add('active');
+			document.querySelector('.weather__nav--prev').classList.add('active');
 		}
 		else {
 			prevActive = false;
-			document.querySelector('.js-prev').classList.remove('active');
+			document.querySelector('.weather__nav--prev').classList.remove('active');
 		}
 	};
 
 	document.querySelector('.header__h1').append(createToday());
 	showWeather(tmpShowDate, data);
 
-	document.querySelector('.js-prev').addEventListener('click', event => {
+	document.querySelector('.weather__nav--prev').addEventListener('click', event => {
 		if(prevActive) {
 			tmpShowDate = getDateTimeStamp(tmpShowDate, -1);
 			showWeather(tmpShowDate, data);
 		}
 	});
-	document.querySelector('.js-next').addEventListener('click', event => {
+	document.querySelector('.weather__nav--next').addEventListener('click', event => {
 		if(nextActive) {
 			tmpShowDate = getDateTimeStamp(tmpShowDate, 1);
 			showWeather(tmpShowDate, data);
 		}
 	});
-
 });
 
 

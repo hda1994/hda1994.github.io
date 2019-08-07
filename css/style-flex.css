@@ -38,11 +38,11 @@
 }
 
 .weather__nav--prev {
-	background: url(../src/prev.png);
+	background: url(../assets/prev.png);
 }
 
 .weather__nav--prev.active {
-	background: url(../src/prev-active.png);
+	background: url(../assets/prev-active.png);
 	background-repeat: no-repeat;
   background-size: contain;
   background-position: center center;
@@ -54,11 +54,11 @@
 }
 
 .weather__nav--next {
-	background: url(../src/next.png);
+	background: url(../assets/next.png);
 }
 
 .weather__nav--next.active {
-	background: url(../src/next-active.png);
+	background: url(../assets/next-active.png);
 	background-repeat: no-repeat;
   background-size: contain;
   background-position: center center;
@@ -73,14 +73,12 @@
 	background-repeat: no-repeat;
 	background-size: contain;
 	background-position: center center;
-	/*display: flex;*/
 	flex: 1 30px;
 }
 
 .weather__list, .weather-list {
 	display: flex;
 	flex: 8;
-	/*height: 350px;*/
 	justify-content: center;
 }
 .weather-list__item:hover, .weather-list-item:hover {
@@ -135,7 +133,7 @@
 }
 
 .weather-list-item__img {
-	background: url(../src/sprite.png);
+	background: url(../assets/sprite.png);
 }
 .weather-list-item__img--sun-none {
 	background-position: 0px center;
