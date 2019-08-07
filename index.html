@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Прогноз погоды</title>
+        <meta name="description" content="Прогноз погоды">
+        <meta name="keywords" content="погода сегодня">
+        <link href="css/style-flex.css" rel="stylesheet">
+        <link href="css/spinner.css" rel="stylesheet">
+    </head>
+    <body>
+
+        <header class="header">
+            <h1 class="header__h1">Прогноз погоды </h1>
+        </header>
+
+        <section class="weather">
+            <div class="weather__nav weather__nav--prev js-prev"></div>
+            <div class="weather__list weather-list js-weather__list"></div>
+            <div class="weather__nav weather__nav--next js-next"></div> 
+        </section>
+        
+        <footer class="footer">
+            <p class="footer__tasr-description">Прелоудер появляется в случае отсутствия данных об этом дне.</p>
+            <p class="footer__tasr-description">Возможность сдвигать вправо остается до тех пор, пока есь данные для хотя бы одной карточки.</p>
+        </footer>
+        <script type="text/javascript" src="js/data.json"></script>
+        <script type="text/javascript" src="js/script.js"></script>
+
+    </body>
+</html>
