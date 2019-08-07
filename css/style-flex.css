@@ -48,6 +48,10 @@
   background-position: center center;
   cursor: pointer;
 }
+.weather__nav--prev.active:hover {
+	-webkit-animation: pulsing 1.8s infinite;
+  animation: pulsing 1.8s infinite;
+}
 
 .weather__nav--next {
 	background: url(../src/next.png);
@@ -59,6 +63,10 @@
   background-size: contain;
   background-position: center center;
   cursor: pointer;
+}
+.weather__nav--next.active:hover {
+	-webkit-animation: pulsing 1.8s infinite;
+  animation: pulsing 1.8s infinite;
 }
 
 .weather__nav {
@@ -75,8 +83,11 @@
 	/*height: 350px;*/
 	justify-content: center;
 }
-
+.weather-list__item:hover, .weather-list-item:hover {
+	background-color: #e4e4e4;
+}
 .weather-list__item, .weather-list-item {
+	transition: background-color 0.6s linear;
 	padding: 24px 0;
 	display: flex;
 	flex-direction: column;
@@ -164,4 +175,29 @@
 	font-size: 14px;
 	font-weight: 400;
 	color: #555555;
+}
+
+
+
+
+@-webkit-keyframes pulsing {
+  0%, 80%, 100% {
+    -webkit-transform: scale(1.0, 1.0);
+    transform: scale(1.0, 1.0);
+  }
+  40% {
+    -webkit-transform: scale(0.9, 0.9);
+    transform: scale(0.9, 0.9);
+  }
+}
+
+@keyframes pulsing {
+  0%, 80%, 100% {
+    -webkit-transform: scale(1.0, 1.0);
+    transform: scale(1.0, 1.0);
+  }
+  40% {
+    -webkit-transform: scale(0.9, 0.9);
+    transform: scale(0.9, 0.9);
+  }
 }
